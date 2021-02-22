@@ -1,34 +1,18 @@
-const int ledPin =  LED_BUILTIN;
-
-// globale variabelen
-int ledState = LOW;               // status van de LED
-unsigned long millisVorigeVerandering = 0; // bewaard tijd van laatste LED-verandering
-
-// andere constanten
-const long interval = 1000;           // interval in milliseconden
-
+#include <Servo.h>  // add servo library
+ 
+Servo myservo;  // create servo object to control a servo
+ 
+int potpin = 0;  // analog pin used to connect the potentiometer
+int val;    // variable to read the value from the analog pin
+ 
 void setup() {
-  // stel ledpin in als output:
-  pinMode(ledPin, OUTPUT);
+  myservo.attach(9);  // attaches the servo on pin 9 to the servo object
 }
-
+ 
 void loop() {
-  // tijd van nu
-  unsigned long millisNu = millis();
-
-  // is de verstreken tijd sinds de laatste verandering langer dan de interval?
-  if (millisNu - millisVorigeVerandering >= interval) {    
-    // bewaar tijdstip van de verandering die we hierna gaan doen
-    millisVorigeVerandering = millisNu;
-
-    // zet de status van de LED om
-    if (ledState == LOW) {
-      ledState = HIGH;
-    } else {
-      ledState = LOW;
-    }
-
-    // geef de pin de waarde van de status
-    digitalWrite(ledPin, ledState);
-  }
+  val = analogRead(potpin);            // reads the value of the potentiometer (value between 0 and 1023)
+  val = map(val, 0, 1023, 0, 180);     // scale it to use it with the servo (value between 0 and 180)
+  myservo.write(val);                  // sets the servo position according to the scaled value
+  delay(15);                           // waits for the servo to get there
 }
+
