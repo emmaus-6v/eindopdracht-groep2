@@ -2,6 +2,7 @@ var achtergrondPlaatje;
 var laatsteUpdateTimeStamp;
 var button;
 var numberOfButtonPresses = 0;
+var baanStatus = 0;
 
 /**
  * preload
@@ -78,7 +79,6 @@ function getTotalPresses() {
   request.send()
 }
 
-
 function buttonPressed() {
   // zet het serverrequest in elkaar
   var request = new XMLHttpRequest()
@@ -133,4 +133,6 @@ function draw() {
   image(achtergrondPlaatje, 0, 0, 480, 200);
   fill(255, 255, 255);
   text("Aantal ballen gepasseerd: " + numberOfButtonPresses, 160, 120);
+
+  text(PotValue, 230, 100);
 }
