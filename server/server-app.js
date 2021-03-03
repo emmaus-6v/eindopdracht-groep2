@@ -152,8 +152,7 @@ function setKnikkerbaanStatus(_request, response) {
 
 
 function getKnikkerbaanStatus(_request, response) {
-  const newStatus = parseInt(_request.params.newStatus);
-  pool.query("SELECT FROM baanStatus WHERE MAX(tijd) VALUES ($1, CURRENT_TIMESTAMP, $2)", [newStatus, comment], (error, results) => {
+  pool.query("SELECT status FROM baanStatus WHERE tijd = (SELECT MAX(tijd) FROM baanStatus)", [newStatus, comment], (error, results) => {
     if (error) {
       throw error;
     }
