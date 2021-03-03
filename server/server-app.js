@@ -25,6 +25,7 @@ app.get('/api/checkchanges/:widgetTimeStamp', checkChanges);
 app.get('/api/addButtonPress', addButtonPress);
 app.get('/api/getTotalPresses', getTotalPresses);
 app.get('/api/setKnikkerbaanStatus/:newStatus', setKnikkerbaanStatus);
+app.get('/api/getLastKnikkerbaanStatus', getKnikkerbaanStatus);
 
 
 // start de server en geef een berichtje in de console dat het gelukt is!
@@ -141,8 +142,18 @@ function getTotalPresses(_request, response){
  * @param response het antwoord dat teruggegeven gaat worden.
  */
 function setKnikkerbaanStatus(_request, response) {
+  pool.query("INSERT INTO baanStatus (status, tijd, opmerking) VALUES ($1, CURRENT_TIMESTAMP, $2)", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(201).send("Status has been modified");
+  });
+}
+
+
+function getKnikkerbaanStatus(_request, response) {
   const newStatus = parseInt(_request.params.newStatus);
-  pool.query("INSERT INTO baanStatus (status, tijd, opmerking) VALUES ($1, CURRENT_TIMESTAMP, $2)", [newStatus, comment], (error, results) => {
+  pool.query("SELECT FROM baanStatus WHERE MAX(tijd) VALUES ($1, CURRENT_TIMESTAMP, $2)", [newStatus, comment], (error, results) => {
     if (error) {
       throw error;
     }
