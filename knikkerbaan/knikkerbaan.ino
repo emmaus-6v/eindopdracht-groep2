@@ -3,8 +3,8 @@
 #include <WiFiNINA.h>
 #include <utility/wifi_drv.h>
 
-char ssid[] = "H369AEA3FC5";    // naam van het WiFi-netwerk. Dat heet SSID
-char pass[] = "2911131166mspr";                  // WiFi-wachtwoord
+char ssid[] = "iPhone van APC";    // naam van het WiFi-netwerk. Dat heet SSID
+chra pass[] = "knikkerbaan";                  // WiFi-wachtwoord
 
 int status = WL_IDLE_STATUS;
 
@@ -208,7 +208,7 @@ void printWiFiStatus() {
 
   // print het IP-adres dat je Arduino heeft gekregen:
   IPAddress ip = WiFi.localIP();
-  Serial.print("IP-adres:192.168.2.6 ");
+  Serial.print("IP-adres: https://3000-blue-crawdad-kcogf7b8.ws-eu03.gitpod.io/");
   Serial.println(ip);
 
   // print de sterkte van het signaal:
@@ -231,3 +231,4 @@ void setWiFiLED(uint8_t rood, uint8_t groen, uint8_t blauw) {
 
                           
 }
+
