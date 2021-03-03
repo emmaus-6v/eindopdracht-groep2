@@ -4,6 +4,7 @@ var button;
 var numberOfButtonPresses = 0;
 var baanStatus = 0;
 var PotValue = 0;
+var interval = 0;
 
 /**
  * preload
@@ -101,10 +102,10 @@ function buttonPressed() {
 function baanStatus() {
   // zet het serverrequest in elkaar
   var request = new XMLHttpRequest()
-  request.open('GET', '/api/LastKnikkenbaanStatus', true)
+  request.open('GET', 'api/getLastKnikkerbaanStatus', true)
   request.onload = function () {
     if (request.status >= 200 && request.status < 400) {
-      console.log('baanStatus doorgegeven aan server');
+      console.log('baanStatus is:' + this.response);
     }
     else {
         console.log("bleh, server reageert niet zoals gehoopt");
@@ -134,7 +135,8 @@ function setup() {
   laatsteUpdateTimeStamp = new Date().setTime(0);
 
   // we vragen elke seconde of er iets is veranderd
-  setInterval(checkForDatabaseChanges, 1000);
+  interval = setInterval(baanStatus, 1000);
+  console.log("setup afgerond");
 }
 
 
