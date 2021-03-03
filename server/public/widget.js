@@ -98,6 +98,23 @@ function buttonPressed() {
   request.send()
 }
 
+function baanStatus() {
+  // zet het serverrequest in elkaar
+  var request = new XMLHttpRequest()
+  request.open('GET', '/api/LastKnikkenbaanStatus', true)
+  request.onload = function () {
+    if (request.status >= 200 && request.status < 400) {
+      console.log('baanStatus doorgegeven aan server');
+    }
+    else {
+        console.log("bleh, server reageert niet zoals gehoopt");
+        console.log(this.response);
+      }
+  }
+
+  // verstuur het request
+  request.send()
+}
 
 /**
  * setup
@@ -135,5 +152,5 @@ function draw() {
   fill(255, 255, 255);
   text("Aantal ballen gepasseerd: " + numberOfButtonPresses, 160, 120);
 
-  text(PotValue, 230, 100);
+  text(baanStatus, 230, 100);
 }
