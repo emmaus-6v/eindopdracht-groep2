@@ -3,6 +3,7 @@ var laatsteUpdateTimeStamp;
 var button;
 var numberOfButtonPresses = 0;
 var baanStatus = 0;
+var PotValue = 0;
 
 /**
  * preload
@@ -107,7 +108,7 @@ function setup() {
   // Maak het canvas van je widget
   createCanvas(480, 200);
 
-  button = createButton('Balpassage');
+  button = createButton('Klik bij balpassage');
   button.position(200, 58);
   button.mouseClicked(buttonPressed);
 
